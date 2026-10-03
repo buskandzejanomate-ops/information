@@ -1,0 +1,3072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GLOBAL INFO HUB</title>
+
+<style>
+:root{
+    --bg:#070a11;
+    --card:#10141e;
+    --card2:#151a26;
+    --text:#f4f7ff;
+    --muted:#8994a8;
+    --border:#252c3b;
+    --primary:#7357ff;
+    --primary2:#18cfff;
+    --green:#28d89a;
+    --red:#ff5275;
+    --yellow:#ffc44d;
+    --shadow:0 20px 70px rgba(0,0,0,.35);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 10% 0%,rgba(115,87,255,.13),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(24,207,255,.08),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+body.light{
+    --bg:#eef2f8;
+    --card:#fff;
+    --card2:#f7f9fc;
+    --text:#101622;
+    --muted:#647084;
+    --border:#dce2eb;
+    --shadow:0 20px 70px rgba(30,40,60,.12);
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+input,textarea,select{
+    width:100%;
+    background:var(--card2);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:13px 14px;
+    outline:none;
+}
+
+input:focus,textarea:focus,select:focus{
+    border-color:var(--primary);
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* NAV */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,10,17,.82);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+}
+
+body.light .navbar{
+    background:rgba(255,255,255,.85);
+}
+
+.nav-inner{
+    max-width:1400px;
+    margin:auto;
+    min-height:80px;
+    padding:0 24px;
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border:0;
+    background:none;
+    color:var(--text);
+    font-size:20px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    font-size:22px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    box-shadow:0 8px 30px rgba(115,87,255,.3);
+}
+
+.logo span{
+    color:var(--text);
+}
+
+.nav-links{
+    display:flex;
+    gap:5px;
+    margin-left:auto;
+}
+
+.nav-links button{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:11px 15px;
+    border-radius:10px;
+}
+
+.nav-links button:hover,
+.nav-links button.active{
+    background:rgba(115,87,255,.12);
+    color:var(--text);
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.user-btn{
+    padding:0 16px;
+    height:44px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.logout-btn{
+    height:44px;
+    padding:0 18px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--primary),#6245ee);
+    color:white;
+    font-weight:700;
+    box-shadow:0 8px 25px rgba(115,87,255,.25);
+}
+
+/* MAIN */
+
+.container{
+    width:min(1380px,calc(100% - 40px));
+    margin:auto;
+}
+
+.page{
+    min-height:calc(100vh - 80px);
+    padding:45px 0 80px;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:70px 0 65px;
+}
+
+.hero-badge{
+    display:inline-flex;
+    padding:8px 14px;
+    border:1px solid rgba(115,87,255,.3);
+    background:rgba(115,87,255,.08);
+    border-radius:999px;
+    color:#a99cff;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:1000px;
+    margin:auto;
+    font-size:clamp(45px,7vw,82px);
+    line-height:.98;
+    letter-spacing:-4px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,var(--primary),var(--primary2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:720px;
+    margin:25px auto;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:0;
+    border-radius:11px;
+    padding:12px 18px;
+    background:linear-gradient(135deg,var(--primary),#6046ec);
+    color:#fff;
+    font-weight:700;
+    box-shadow:0 8px 25px rgba(115,87,255,.2);
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn.secondary{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+    box-shadow:none;
+}
+
+.btn.green{
+    background:linear-gradient(135deg,#16b97c,var(--green));
+}
+
+.btn.red{
+    background:linear-gradient(135deg,#ff426a,var(--red));
+}
+
+.btn.yellow{
+    background:linear-gradient(135deg,#efa900,var(--yellow));
+    color:#161616;
+}
+
+.btn.small{
+    padding:7px 11px;
+    font-size:12px;
+}
+
+/* CARDS */
+
+.card{
+    background:rgba(16,20,30,.86);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+}
+
+body.light .card{
+    background:rgba(255,255,255,.9);
+}
+
+.grid{
+    display:grid;
+    gap:18px;
+}
+
+.grid2{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid3{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.grid4{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+/* STATS */
+
+.stat{
+    position:relative;
+    overflow:hidden;
+}
+
+.stat:after{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    right:-45px;
+    top:-45px;
+    border-radius:50%;
+    background:rgba(115,87,255,.08);
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.stat-value{
+    font-size:34px;
+    font-weight:850;
+    margin-top:7px;
+}
+
+/* TITLES */
+
+.section-title{
+    margin-bottom:22px;
+}
+
+.section-title h2{
+    font-size:30px;
+    margin-bottom:6px;
+}
+
+.section-title p{
+    color:var(--muted);
+}
+
+/* INFO */
+
+.info-card{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.info-card h3{
+    font-size:20px;
+}
+
+.info-card p{
+    color:var(--muted);
+    line-height:1.65;
+}
+
+.verified{
+    color:var(--green);
+    font-size:12px;
+    font-weight:800;
+}
+
+.tags{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:auto;
+}
+
+.tag{
+    padding:5px 9px;
+    background:rgba(115,87,255,.1);
+    color:#aaa1ff;
+    border-radius:999px;
+    font-size:12px;
+}
+
+/* FILTERS */
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+    margin-bottom:22px;
+}
+
+/* FORM */
+
+.form{
+    max-width:850px;
+    margin:auto;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+/* TABLE */
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    min-width:850px;
+    border-collapse:collapse;
+}
+
+th,td{
+    text-align:left;
+    padding:14px 12px;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+th{
+    color:var(--muted);
+    font-weight:700;
+}
+
+td{
+    color:var(--text);
+}
+
+.ip-address{
+    color:#64ddff;
+    font-family:monospace;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+/* NOTICE */
+
+.notice{
+    padding:14px 16px;
+    border-radius:13px;
+    margin-bottom:18px;
+    border:1px solid rgba(255,196,77,.25);
+    background:rgba(255,196,77,.07);
+    color:var(--yellow);
+    line-height:1.6;
+    font-size:13px;
+}
+
+.notice.info{
+    border-color:rgba(24,207,255,.2);
+    background:rgba(24,207,255,.06);
+    color:#6be1ff;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.72);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:min(520px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+/* TOAST */
+
+.toast-container{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:6000;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.toast{
+    background:#141b2a;
+    color:white;
+    border:1px solid #293247;
+    border-radius:12px;
+    padding:13px 17px;
+    box-shadow:var(--shadow);
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 0;
+    text-align:center;
+    color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .grid4{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grid3{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .nav-inner{
+        flex-wrap:wrap;
+        padding:12px 15px;
+    }
+
+    .nav-links{
+        width:100%;
+        order:3;
+        overflow-x:auto;
+        margin-left:0;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:calc(100% - 24px);
+    }
+
+    .grid2,
+    .grid3,
+    .grid4,
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:45px 0;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .logo span{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+<div class="nav-inner">
+
+    <button class="logo" onclick="showPage('home')">
+
+        <div class="logo-icon">
+            🌐
+        </div>
+
+        <span>
+            GLOBAL INFO HUB
+        </span>
+
+    </button>
+
+    <div class="nav-links">
+
+        <button data-page="home" onclick="showPage('home')">
+            Home
+        </button>
+
+        <button data-page="browse" onclick="showPage('browse')">
+            Browse
+        </button>
+
+        <button data-page="submit" onclick="showPage('submit')">
+            Submit
+        </button>
+
+        <button data-page="profile" onclick="showPage('profile')">
+            Profile
+        </button>
+
+        <button data-page="admin" onclick="showPage('admin')">
+            Admin
+        </button>
+
+        <button data-page="boss" onclick="showPage('boss')">
+            Boss
+        </button>
+
+    </div>
+
+    <div class="nav-actions">
+
+        <button
+            class="icon-btn"
+            onclick="toggleTheme()"
+            title="Toggle theme">
+
+            ◐
+
+        </button>
+
+        <button
+            id="navUser"
+            class="user-btn"
+            onclick="openLogin()">
+
+            Login
+
+        </button>
+
+        <button
+            id="navLogout"
+            class="logout-btn hidden"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</div>
+
+</nav>
+
+<main id="app"></main>
+
+<footer>
+    GLOBAL INFO HUB · Worldwide Knowledge Platform
+</footer>
+
+<div id="modal" class="modal hidden"></div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script>
+
+/* =====================================================
+   DATABASE
+===================================================== */
+
+const DEFAULT_DB = {
+
+    users:[
+        {
+            id:"admin-user",
+            username:"admin123",
+            password:"admin12345",
+            role:"ADMIN",
+            verified:true
+        },
+        {
+            id:"boss-user",
+            username:"boss",
+            password:"boss67",
+            role:"BOSS",
+            verified:true
+        }
+    ],
+
+    categories:[
+        "Technology",
+        "Science",
+        "History",
+        "Geography",
+        "Nature",
+        "Space",
+        "Culture",
+        "Education",
+        "Business",
+        "Other"
+    ],
+
+    countries:[
+        "Georgia",
+        "United States",
+        "United Kingdom",
+        "Germany",
+        "France",
+        "Japan",
+        "China",
+        "India",
+        "Canada",
+        "Australia",
+        "Other"
+    ],
+
+    infos:[
+        {
+            id:"info1",
+            title:"The Earth revolves around the Sun",
+            summary:"Earth completes one orbit around the Sun in approximately 365.25 days.",
+            content:"Earth travels around the Sun in an elliptical orbit. One complete revolution takes approximately 365.25 days.",
+            category:"Science",
+            country:"Other",
+            source:"https://science.nasa.gov/",
+            author:"admin123",
+            status:"approved",
+            verified:true,
+            createdAt:new Date().toISOString()
+        },
+        {
+            id:"info2",
+            title:"The Internet is a global network",
+            summary:"The Internet connects computer networks around the world.",
+            content:"The Internet is a worldwide system of interconnected computer networks that communicate using standardized protocols.",
+            category:"Technology",
+            country:"Other",
+            source:"https://www.icann.org/",
+            author:"admin123",
+            status:"approved",
+            verified:true,
+            createdAt:new Date().toISOString()
+        }
+    ],
+
+    logs:[],
+    visits:[],
+    loginAttempts:[]
+};
+
+let db;
+
+try{
+
+    db=JSON.parse(
+        localStorage.getItem("globalInfoHubDB")
+    );
+
+}catch(e){
+
+    db=null;
+}
+
+if(!db){
+
+    db=DEFAULT_DB;
+
+    saveDB();
+
+}
+
+/* =====================================================
+   SESSION
+===================================================== */
+
+let currentUser=null;
+
+try{
+
+    currentUser=JSON.parse(
+        localStorage.getItem("globalInfoHubSession")
+    );
+
+}catch(e){
+
+    currentUser=null;
+
+}
+
+/* =====================================================
+   DATABASE SAVE
+===================================================== */
+
+function saveDB(){
+
+    localStorage.setItem(
+        "globalInfoHubDB",
+        JSON.stringify(db)
+    );
+
+}
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(value){
+
+    if(!value)
+        return "Unknown";
+
+    return new Date(value).toLocaleString();
+
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function toast(message){
+
+    const container=
+        document.getElementById("toastContainer");
+
+    const el=document.createElement("div");
+
+    el.className="toast";
+
+    el.textContent=message;
+
+    container.appendChild(el);
+
+    setTimeout(()=>{
+        el.remove();
+    },3000);
+
+}
+
+/* =====================================================
+   PUBLIC IP SYSTEM
+===================================================== */
+
+/*
+    The browser cannot directly read the public IP.
+
+    This function asks ipify for the public IPv4 address.
+
+    The result is cached during this page session so
+    navigation does not repeatedly request the address.
+*/
+
+let visitorIP=null;
+
+let visitorIPPromise=null;
+
+async function getVisitorIP(){
+
+    if(visitorIP){
+
+        return visitorIP;
+
+    }
+
+    if(visitorIPPromise){
+
+        return visitorIPPromise;
+
+    }
+
+    visitorIPPromise=
+
+        fetch(
+            "https://api.ipify.org?format=json",
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        )
+
+        .then(response=>{
+
+            if(!response.ok){
+
+                throw new Error(
+                    "IP request failed"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data=>{
+
+            visitorIP=
+                data.ip || "Unknown";
+
+            return visitorIP;
+
+        })
+
+        .catch(error=>{
+
+            console.error(
+                "IP lookup failed:",
+                error
+            );
+
+            visitorIP="Unknown";
+
+            return visitorIP;
+
+        });
+
+    return visitorIPPromise;
+
+}
+
+/* =====================================================
+   VISIT LOGGER
+===================================================== */
+
+async function logVisit(page){
+
+    const ip=
+        await getVisitorIP();
+
+    db.visits.unshift({
+
+        id:crypto.randomUUID(),
+
+        page:page,
+
+        user:
+            currentUser?.username ||
+            "anonymous",
+
+        ip:ip,
+
+        country:"Unknown",
+
+        timestamp:
+            new Date().toISOString()
+
+    });
+
+    db.visits=
+        db.visits.slice(0,1000);
+
+    saveDB();
+
+}
+
+/* =====================================================
+   ACTION LOG
+===================================================== */
+
+function logAction(action,details=""){
+
+    db.logs.unshift({
+
+        id:crypto.randomUUID(),
+
+        action:action,
+
+        details:details,
+
+        user:
+            currentUser?.username ||
+            "anonymous",
+
+        timestamp:
+            new Date().toISOString()
+
+    });
+
+    db.logs=
+        db.logs.slice(0,1000);
+
+    saveDB();
+
+}
+
+/* =====================================================
+   LOGIN LOG
+===================================================== */
+
+function logLogin(username,success){
+
+    db.loginAttempts.unshift({
+
+        id:crypto.randomUUID(),
+
+        username:username,
+
+        success:success,
+
+        timestamp:
+            new Date().toISOString()
+
+    });
+
+    db.loginAttempts=
+        db.loginAttempts.slice(0,1000);
+
+    saveDB();
+
+}
+
+/* =====================================================
+   PAGE ROUTER
+===================================================== */
+
+function showPage(page){
+
+    document
+        .querySelectorAll("[data-page]")
+        .forEach(button=>{
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page===page
+            );
+
+        });
+
+    updateNavbar();
+
+    /*
+        Fire-and-forget visit logging.
+        The IP lookup happens asynchronously.
+    */
+
+    logVisit(page);
+
+    const app=
+        document.getElementById("app");
+
+    if(page==="home")
+        renderHome(app);
+
+    else if(page==="browse")
+        renderBrowse(app);
+
+    else if(page==="submit")
+        renderSubmit(app);
+
+    else if(page==="profile")
+        renderProfile(app);
+
+    else if(page==="admin")
+        renderAdmin(app);
+
+    else if(page==="boss")
+        renderBoss(app);
+
+    else
+        renderHome(app);
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+function updateNavbar(){
+
+    const userButton=
+        document.getElementById("navUser");
+
+    const logoutButton=
+        document.getElementById("navLogout");
+
+    if(currentUser){
+
+        userButton.textContent=
+            currentUser.username;
+
+        userButton.onclick=()=>{
+            showPage("profile");
+        };
+
+        logoutButton.classList.remove("hidden");
+
+    }else{
+
+        userButton.textContent="Login";
+
+        userButton.onclick=openLogin;
+
+        logoutButton.classList.add("hidden");
+
+    }
+
+}
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function renderHome(app){
+
+    const approved=
+        db.infos.filter(
+            x=>x.status==="approved"
+        );
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="hero">
+
+                <div class="hero-badge">
+                    🌍 VERIFIED GLOBAL KNOWLEDGE
+                </div>
+
+                <h1>
+                    The world's information
+                    <span class="gradient">
+                        organized.
+                    </span>
+                </h1>
+
+                <p>
+                    GLOBAL INFO HUB is a worldwide information
+                    platform where users can submit facts,
+                    sources can be reviewed, and verified
+                    knowledge can be discovered.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="btn"
+                        onclick="showPage('browse')">
+
+                        Explore Information
+
+                    </button>
+
+                    <button
+                        class="btn secondary"
+                        onclick="showPage('submit')">
+
+                        Submit Information
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="grid grid4">
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Verified Information
+                    </div>
+
+                    <div class="stat-value">
+                        ${approved.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Categories
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.categories.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Countries
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.countries.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Users
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.users.length}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br><br>
+
+            <div class="section-title">
+
+                <h2>
+                    Latest verified information
+                </h2>
+
+                <p>
+                    Explore recently published information.
+                </p>
+
+            </div>
+
+            <div class="grid grid3">
+
+                ${
+                    approved
+                    .slice(0,6)
+                    .map(createInfoCard)
+                    .join("")
+                }
+
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+/* =====================================================
+   INFO CARD
+===================================================== */
+
+function createInfoCard(info){
+
+    return`
+
+    <article class="card info-card">
+
+        <div class="verified">
+            ✓ VERIFIED
+        </div>
+
+        <h3>
+            ${escapeHTML(info.title)}
+        </h3>
+
+        <p>
+            ${escapeHTML(info.summary)}
+        </p>
+
+        <div class="tags">
+
+            <span class="tag">
+                ${escapeHTML(info.category)}
+            </span>
+
+            <span class="tag">
+                ${escapeHTML(info.country)}
+            </span>
+
+        </div>
+
+        <button
+            class="btn small"
+            onclick="viewInfo('${info.id}')">
+
+            Read More
+
+        </button>
+
+    </article>
+
+    `;
+
+}
+
+/* =====================================================
+   VIEW INFORMATION
+===================================================== */
+
+function viewInfo(id){
+
+    const info=
+        db.infos.find(
+            x=>x.id===id
+        );
+
+    if(!info)
+        return;
+
+    openModal(`
+
+        <div class="verified">
+            ✓ VERIFIED INFORMATION
+        </div>
+
+        <h2 style="margin:10px 0 15px">
+            ${escapeHTML(info.title)}
+        </h2>
+
+        <p style="
+            color:var(--muted);
+            line-height:1.8;
+            margin-bottom:18px;
+        ">
+            ${escapeHTML(info.content)}
+        </p>
+
+        <div class="tags">
+
+            <span class="tag">
+                ${escapeHTML(info.category)}
+            </span>
+
+            <span class="tag">
+                ${escapeHTML(info.country)}
+            </span>
+
+        </div>
+
+        <br>
+
+        <a
+            class="btn small"
+            href="${escapeHTML(info.source)}"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            View Source
+
+        </a>
+
+        <button
+            class="btn secondary small"
+            onclick="closeModal()">
+
+            Close
+
+        </button>
+
+    `);
+
+}
+
+/* =====================================================
+   BROWSE
+===================================================== */
+
+function renderBrowse(app){
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Browse Global Information
+                </h2>
+
+                <p>
+                    Search through verified information.
+                </p>
+
+            </div>
+
+            <div class="filters">
+
+                <input
+                    id="searchInput"
+                    placeholder="Search..."
+                    oninput="filterInformation()">
+
+                <select
+                    id="categoryFilter"
+                    onchange="filterInformation()">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    ${
+                        db.categories.map(c=>`
+
+                            <option value="${escapeHTML(c)}">
+                                ${escapeHTML(c)}
+                            </option>
+
+                        `).join("")
+                    }
+
+                </select>
+
+                <select
+                    id="countryFilter"
+                    onchange="filterInformation()">
+
+                    <option value="">
+                        All Countries
+                    </option>
+
+                    ${
+                        db.countries.map(c=>`
+
+                            <option value="${escapeHTML(c)}">
+                                ${escapeHTML(c)}
+                            </option>
+
+                        `).join("")
+                    }
+
+                </select>
+
+            </div>
+
+            <div
+                id="browseResults"
+                class="grid grid3">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+    filterInformation();
+
+}
+
+/* =====================================================
+   FILTER INFORMATION
+===================================================== */
+
+function filterInformation(){
+
+    const search=
+        (
+            document.getElementById("searchInput")
+            ?.value || ""
+        ).toLowerCase();
+
+    const category=
+        document.getElementById("categoryFilter")
+        ?.value || "";
+
+    const country=
+        document.getElementById("countryFilter")
+        ?.value || "";
+
+    const results=
+        db.infos.filter(info=>{
+
+            if(info.status!=="approved")
+                return false;
+
+            const matchesSearch=
+                !search ||
+                info.title.toLowerCase().includes(search) ||
+                info.summary.toLowerCase().includes(search) ||
+                info.content.toLowerCase().includes(search);
+
+            const matchesCategory=
+                !category ||
+                info.category===category;
+
+            const matchesCountry=
+                !country ||
+                info.country===country;
+
+            return(
+                matchesSearch &&
+                matchesCategory &&
+                matchesCountry
+            );
+
+        });
+
+    const box=
+        document.getElementById(
+            "browseResults"
+        );
+
+    if(!box)
+        return;
+
+    if(!results.length){
+
+        box.innerHTML=`
+
+            <div class="card">
+                No information found.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    box.innerHTML=
+        results
+        .map(createInfoCard)
+        .join("");
+
+}
+
+/* =====================================================
+   SUBMIT PAGE
+===================================================== */
+
+function renderSubmit(app){
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Submit Information
+                </h2>
+
+                <p>
+                    Submit information for verification.
+                </p>
+
+            </div>
+
+            <form
+                class="card form"
+                onsubmit="submitInformation(event)">
+
+                <div class="form-group">
+
+                    <label>
+                        Title
+                    </label>
+
+                    <input
+                        id="submitTitle"
+                        required
+                        placeholder="Information title">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Summary
+                    </label>
+
+                    <textarea
+                        id="submitSummary"
+                        required
+                        placeholder="Short summary">
+                    </textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Full Information
+                    </label>
+
+                    <textarea
+                        id="submitContent"
+                        required
+                        placeholder="Write the complete information">
+                    </textarea>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select
+                            id="submitCategory"
+                            required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            ${
+                                db.categories.map(c=>`
+
+                                    <option>
+                                        ${escapeHTML(c)}
+                                    </option>
+
+                                `).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Country
+                        </label>
+
+                        <select
+                            id="submitCountry"
+                            required>
+
+                            <option value="">
+                                Select country
+                            </option>
+
+                            ${
+                                db.countries.map(c=>`
+
+                                    <option>
+                                        ${escapeHTML(c)}
+                                    </option>
+
+                                `).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Source URL
+                    </label>
+
+                    <input
+                        id="submitSource"
+                        type="url"
+                        required
+                        placeholder="https://example.com">
+
+                </div>
+
+                <button class="btn">
+                    Submit For Verification
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+/* =====================================================
+   SUBMIT INFORMATION
+===================================================== */
+
+function submitInformation(event){
+
+    event.preventDefault();
+
+    const title=
+        document.getElementById(
+            "submitTitle"
+        ).value.trim();
+
+    const summary=
+        document.getElementById(
+            "submitSummary"
+        ).value.trim();
+
+    const content=
+        document.getElementById(
+            "submitContent"
+        ).value.trim();
+
+    const category=
+        document.getElementById(
+            "submitCategory"
+        ).value;
+
+    const country=
+        document.getElementById(
+            "submitCountry"
+        ).value;
+
+    const source=
+        document.getElementById(
+            "submitSource"
+        ).value.trim();
+
+    const duplicate=
+        db.infos.some(
+            x=>
+                x.title.toLowerCase()===
+                title.toLowerCase()
+        );
+
+    if(duplicate){
+
+        toast(
+            "An information entry with this title already exists."
+        );
+
+        return;
+
+    }
+
+    db.infos.unshift({
+
+        id:crypto.randomUUID(),
+
+        title:title,
+
+        summary:summary,
+
+        content:content,
+
+        category:category,
+
+        country:country,
+
+        source:source,
+
+        author:
+            currentUser?.username ||
+            "anonymous",
+
+        status:"pending",
+
+        verified:false,
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+    saveDB();
+
+    logAction(
+        "SUBMIT_INFORMATION",
+        title
+    );
+
+    event.target.reset();
+
+    toast(
+        "Information submitted for verification."
+    );
+
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function renderProfile(app){
+
+    if(!currentUser){
+
+        app.innerHTML=`
+
+        <section class="page">
+
+            <div class="container">
+
+                <div class="card">
+
+                    <h2>
+                        You are not logged in.
+                    </h2>
+
+                    <br>
+
+                    <button
+                        class="btn"
+                        onclick="openLogin()">
+
+                        Login
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        `;
+
+        return;
+
+    }
+
+    const submissions=
+        db.infos.filter(
+            x=>
+                x.author===
+                currentUser.username
+        );
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="grid grid2">
+
+                <div class="card">
+
+                    <div class="hero-badge">
+                        ${escapeHTML(currentUser.role)}
+                    </div>
+
+                    <h2>
+                        ${escapeHTML(currentUser.username)}
+                    </h2>
+
+                    <p style="
+                        color:var(--muted);
+                        margin-top:10px;
+                    ">
+                        Verified account
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="btn red"
+                        onclick="logout()">
+
+                        Logout
+
+                    </button>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Your submissions
+                    </div>
+
+                    <div class="stat-value">
+                        ${submissions.length}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+/* =====================================================
+   ADMIN DASHBOARD
+===================================================== */
+
+function renderAdmin(app){
+
+    if(
+        !currentUser ||
+        currentUser.role!=="ADMIN"
+    ){
+
+        app.innerHTML=`
+
+        <section class="page">
+
+            <div class="container">
+
+                <div class="card">
+
+                    <h2>
+                        Admin access required
+                    </h2>
+
+                    <br>
+
+                    <button
+                        class="btn"
+                        onclick="openLogin()">
+
+                        Admin Login
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        `;
+
+        return;
+
+    }
+
+    const pending=
+        db.infos.filter(
+            x=>x.status==="pending"
+        );
+
+    const approved=
+        db.infos.filter(
+            x=>x.status==="approved"
+        );
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Admin Dashboard
+                </h2>
+
+                <p>
+                    Manage and verify submitted information.
+                </p>
+
+            </div>
+
+            <div class="grid grid4">
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div class="stat-value">
+                        ${pending.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Approved
+                    </div>
+
+                    <div class="stat-value">
+                        ${approved.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Users
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.users.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Logs
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.logs.length}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br><br>
+
+            <div class="card">
+
+                <h3>
+                    Pending Information
+                </h3>
+
+                <br>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Author
+                                </th>
+
+                                <th>
+                                    Category
+                                </th>
+
+                                <th>
+                                    Country
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${
+                                pending.length
+
+                                ?
+
+                                pending.map(info=>`
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHTML(info.title)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(info.author)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(info.category)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(info.country)}
+                                        </td>
+
+                                        <td>
+
+                                            <button
+                                                class="btn small green"
+                                                onclick="approveInfo('${info.id}')">
+
+                                                Approve
+
+                                            </button>
+
+                                            <button
+                                                class="btn small red"
+                                                onclick="rejectInfo('${info.id}')">
+
+                                                Reject
+
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")
+
+                                :
+
+                                `
+
+                                <tr>
+
+                                    <td colspan="5">
+                                        No pending submissions.
+                                    </td>
+
+                                </tr>
+
+                                `
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="card">
+
+                <h3>
+                    Activity Logs
+                </h3>
+
+                <br>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Action
+                                </th>
+
+                                <th>
+                                    User
+                                </th>
+
+                                <th>
+                                    Details
+                                </th>
+
+                                <th>
+                                    Time
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${
+                                db.logs
+                                .slice(0,100)
+                                .map(log=>`
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHTML(log.action)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(log.user)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(log.details)}
+                                        </td>
+
+                                        <td>
+                                            ${formatDate(log.timestamp)}
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+/* =====================================================
+   APPROVE / REJECT
+===================================================== */
+
+function approveInfo(id){
+
+    const info=
+        db.infos.find(
+            x=>x.id===id
+        );
+
+    if(!info)
+        return;
+
+    info.status="approved";
+    info.verified=true;
+
+    saveDB();
+
+    logAction(
+        "APPROVE_INFORMATION",
+        info.title
+    );
+
+    toast(
+        "Information approved."
+    );
+
+    renderAdmin(
+        document.getElementById("app")
+    );
+
+}
+
+function rejectInfo(id){
+
+    const info=
+        db.infos.find(
+            x=>x.id===id
+        );
+
+    if(!info)
+        return;
+
+    info.status="rejected";
+    info.verified=false;
+
+    saveDB();
+
+    logAction(
+        "REJECT_INFORMATION",
+        info.title
+    );
+
+    toast(
+        "Information rejected."
+    );
+
+    renderAdmin(
+        document.getElementById("app")
+    );
+
+}
+
+/* =====================================================
+   BOSS DASHBOARD
+===================================================== */
+
+function renderBoss(app){
+
+    if(
+        !currentUser ||
+        currentUser.role!=="BOSS"
+    ){
+
+        app.innerHTML=`
+
+        <section class="page">
+
+            <div class="container">
+
+                <div class="card">
+
+                    <h2>
+                        Boss access required
+                    </h2>
+
+                    <br>
+
+                    <button
+                        class="btn"
+                        onclick="openLogin()">
+
+                        Boss Login
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        `;
+
+        return;
+
+    }
+
+    app.innerHTML=`
+
+    <section class="page">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Boss Security Dashboard
+                </h2>
+
+                <p>
+                    Visitor activity, public IP addresses,
+                    authentication attempts and system logs.
+                </p>
+
+            </div>
+
+            <div class="notice">
+
+                ⚠️ <strong>IP logging:</strong>
+                This demo obtains the visitor's public IP
+                through an external IP lookup service.
+                IP data is stored locally in this browser.
+
+            </div>
+
+            <div class="grid grid4">
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Users
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.users.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Recorded Visits
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.visits.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        Login Attempts
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.loginAttempts.length}
+                    </div>
+
+                </div>
+
+                <div class="card stat">
+
+                    <div class="stat-label">
+                        System Logs
+                    </div>
+
+                    <div class="stat-value">
+                        ${db.logs.length}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br><br>
+
+            <!-- VISITOR ACTIVITY -->
+
+            <div class="card">
+
+                <h3>
+                    Visitor Activity
+                </h3>
+
+                <br>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Page
+                                </th>
+
+                                <th>
+                                    User
+                                </th>
+
+                                <th>
+                                    IP Address
+                                </th>
+
+                                <th>
+                                    Country
+                                </th>
+
+                                <th>
+                                    Timestamp
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${
+                                db.visits.length
+
+                                ?
+
+                                db.visits
+                                .slice(0,150)
+                                .map(visit=>`
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                visit.page
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                visit.user
+                                            )}
+                                        </td>
+
+                                        <td class="ip-address">
+                                            ${escapeHTML(
+                                                visit.ip ||
+                                                "Unknown"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                visit.country ||
+                                                "Unknown"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${formatDate(
+                                                visit.timestamp
+                                            )}
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")
+
+                                :
+
+                                `
+
+                                <tr>
+
+                                    <td colspan="5">
+                                        No visitor activity yet.
+                                    </td>
+
+                                </tr>
+
+                                `
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- LOGIN ATTEMPTS -->
+
+            <div class="card">
+
+                <h3>
+                    Login Attempts
+                </h3>
+
+                <br>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Username
+                                </th>
+
+                                <th>
+                                    Result
+                                </th>
+
+                                <th>
+                                    Timestamp
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${
+                                db.loginAttempts.length
+
+                                ?
+
+                                db.loginAttempts
+                                .slice(0,100)
+                                .map(attempt=>`
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                attempt.username
+                                            )}
+                                        </td>
+
+                                        <td style="
+                                            color:${
+                                                attempt.success
+                                                ?"var(--green)"
+                                                :"var(--red)"
+                                            };
+                                            font-weight:800;
+                                        ">
+
+                                            ${
+                                                attempt.success
+                                                ?"SUCCESS"
+                                                :"FAILED"
+                                            }
+
+                                        </td>
+
+                                        <td>
+                                            ${formatDate(
+                                                attempt.timestamp
+                                            )}
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")
+
+                                :
+
+                                `
+
+                                <tr>
+
+                                    <td colspan="3">
+                                        No login attempts recorded.
+                                    </td>
+
+                                </tr>
+
+                                `
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- USERS -->
+
+            <div class="card">
+
+                <h3>
+                    Users
+                </h3>
+
+                <br>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Username
+                                </th>
+
+                                <th>
+                                    Role
+                                </th>
+
+                                <th>
+                                    Verified
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${
+                                db.users.map(user=>`
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                user.username
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHTML(
+                                                user.role
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${
+                                                user.verified
+                                                ?"✓ VERIFIED"
+                                                :"NO"
+                                            }
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+/* =====================================================
+   LOGIN MODAL
+===================================================== */
+
+function openLogin(){
+
+    openModal(`
+
+        <h2>
+            Login
+        </h2>
+
+        <p style="
+            color:var(--muted);
+            margin:8px 0 22px;
+        ">
+            Access GLOBAL INFO HUB.
+        </p>
+
+        <form onsubmit="login(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    id="loginUsername"
+                    required
+                    autocomplete="username">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    required
+                    autocomplete="current-password">
+
+            </div>
+
+            <button
+                class="btn"
+                style="width:100%">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <br>
+
+        <div class="notice info">
+
+            <strong>Demo Admin</strong><br>
+            Username: admin123<br>
+            Password: admin12345
+
+            <br><br>
+
+            <strong>Demo Boss</strong><br>
+            Username: boss<br>
+            Password: boss67
+
+        </div>
+
+        <button
+            class="btn secondary"
+            style="width:100%"
+            onclick="closeModal()">
+
+            Cancel
+
+        </button>
+
+    `);
+
+}
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(event){
+
+    event.preventDefault();
+
+    const username=
+        document.getElementById(
+            "loginUsername"
+        ).value.trim();
+
+    const password=
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+    const user=
+        db.users.find(
+            x=>
+                x.username===username &&
+                x.password===password
+        );
+
+    const success=Boolean(user);
+
+    logLogin(
+        username,
+        success
+    );
+
+    if(!user){
+
+        toast(
+            "Invalid username or password."
+        );
+
+        return;
+
+    }
+
+    currentUser={
+
+        id:user.id,
+
+        username:user.username,
+
+        role:user.role,
+
+        verified:user.verified
+
+    };
+
+    localStorage.setItem(
+        "globalInfoHubSession",
+        JSON.stringify(currentUser)
+    );
+
+    logAction(
+        "LOGIN",
+        "Successful login"
+    );
+
+    closeModal();
+
+    updateNavbar();
+
+    toast(
+        "Welcome, "+user.username+"!"
+    );
+
+    showPage("profile");
+
+}
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    logAction(
+        "LOGOUT",
+        "User logged out"
+    );
+
+    currentUser=null;
+
+    localStorage.removeItem(
+        "globalInfoHubSession"
+    );
+
+    updateNavbar();
+
+    toast(
+        "Logged out."
+    );
+
+    showPage("home");
+
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(content){
+
+    const modal=
+        document.getElementById("modal");
+
+    modal.innerHTML=`
+
+        <div class="modal-box">
+
+            ${content}
+
+        </div>
+
+    `;
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.add(
+            "hidden"
+        );
+
+}
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "light"
+    );
+
+    localStorage.setItem(
+        "globalInfoHubTheme",
+        document.body.classList.contains("light")
+        ?"light"
+        :"dark"
+    );
+
+}
+
+if(
+    localStorage.getItem(
+        "globalInfoHubTheme"
+    )==="light"
+){
+
+    document.body.classList.add(
+        "light"
+    );
+
+}
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        event=>{
+
+            if(
+                event.target.id==="modal"
+            ){
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(event.key==="Escape"){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+/* =====================================================
+   START
+===================================================== */
+
+updateNavbar();
+
+showPage("home");
+
+</script>
+
+</body>
+</html>
